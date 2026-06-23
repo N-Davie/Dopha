@@ -1,23 +1,20 @@
-название 
-описание 
-пользователь
+from pydantic import BaseModel
+from datetime import datetime
 
 
-Base = declarative_base()
+class HabitCreate(BaseModel):
+    title: str
+    description: str
 
 
-class Habit(Base):
-    __tablename__ = 'habits'
-
-    id = Column(Integer, primary_key=True)
-    title = Column(String)
-    description = Column(String(255))
-    created_at = Column(
-        DateTime,
-        default=lambda: datetime.now(timezone.utc)
-    )
-    user_id = Column(Integer, ForeignKey('users.id'))
+class HabitResponse(BaseModel):
+    id: int
+    title: str
+    description: str
+    created_at: datetime
+    user_id: int
 
 
-
-class UserCreate(): #описывает какие данные АПИ принимает при регистрациипольщователя 
+class HabitUpdate(BaseModel):
+    title: str
+    description: str
